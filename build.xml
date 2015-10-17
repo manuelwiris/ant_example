@@ -1,4 +1,4 @@
-<project name="MyProject" default="dist" basedir=".">
+<project name="MyProject" basedir=".">
   <description>
     Example file for ant integration with Jenkins and Moodle.
   </description>
@@ -42,7 +42,7 @@
     </git>
   </target>
 
-  <target name="deploy" description"Merge development branch into master">
+  <target name="deploy" description="Merge development branch into master">
     <git command="checkout">
       <args>
         <arg line="master"/>

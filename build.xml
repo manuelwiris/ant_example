@@ -1,0 +1,8 @@
+<project name="MyProject" default="dist" basedir=".">
+  <description>
+    simple example build file
+  </description>
+  <target name="echo">
+  	<echo message="Hello world"/>
+  </target>
+</project>

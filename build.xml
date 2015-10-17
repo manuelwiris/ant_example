@@ -1,8 +1,44 @@
 <project name="MyProject" default="dist" basedir=".">
   <description>
-    simple example build file
+    Example file for ant integration with Jenkins and Moodle.
   </description>
-  <target name="echo">
-  	<echo message="Hello world"/>
+
+  	<macrodef name="git">
+		<attribute name="command" />
+		<attribute name="dir" default="${git-dir}" />
+		<element name="args" optional="true" />
+		<sequential>
+			<echo message="git @{command}" />
+			<exec executable="git" dir="@{dir}">
+				<arg value="@{command}" />
+				<args/>
+			</exec>
+		</sequential>
+	</macrodef>
+
+  <target name="configure_moodle29">
+    <property name="moodle-dirroot" value="/var/www/html/moodle29/"/>
+    <property name="git-dir" value="/var/www/html/moodle29/lib/editor/atto/plugins/basicbutton"/>  	
+  </target>
+
+  <target name="test">
+    <exec executable="${moodle-dirroot}/vendor/bin/phpunit" dir="${moodle-dirroot}" failonerror="true">
+        <arg value="${git-dir}/tests/basicbutton_test.php"/>        
+    </exec>
+  </target>
+
+  <target name="download-dev" description="Clone git repository on Moodle">
+    <mkdir dir="${git-dir}"/>
+    <git command="clone">
+      <args>
+        <arg value="git@github.com:manuelwiris/moodle-atto_basicbutton.git"/>
+        <arg line="."/>
+      </args>
+    </git>
+    <git command="checkout">
+      <args>
+        <arg value="development_example"/>
+      </args>
+    </git>
   </target>
 </project>

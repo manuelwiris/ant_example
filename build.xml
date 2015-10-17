@@ -16,7 +16,7 @@
 		</sequential>
 	</macrodef>
 
-  <target name="configure_moodle29">
+  <target name="configure_moodle29" description="Set Moodle29 variables">
     <property name="moodle-dirroot" value="/var/www/html/moodle29/"/>
     <property name="git-dir" value="/var/www/html/moodle29/lib/editor/atto/plugins/basicbutton"/>  	
   </target>
@@ -38,6 +38,24 @@
     <git command="checkout">
       <args>
         <arg value="development_example"/>
+      </args>
+    </git>
+  </target>
+
+  <target name="deploy" description"Merge development branch into master">
+    <git command="checkout">
+      <args>
+        <arg line="master"/>
+      </args>
+    </git>
+    <git command="merge">
+      <args>
+        <arg line="development_example"/>
+      </args>
+    </git>
+    <git command="push">
+      <args>
+        <arg line="-u origin master"/>
       </args>
     </git>
   </target>

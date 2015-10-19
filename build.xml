@@ -31,7 +31,7 @@
     <mkdir dir="${git-dir}"/>
     <git command="clone">
       <args>
-        <arg value="git@github.com:manuelwiris/moodle-atto_basicbutton.git"/>
+        <arg value="https://github.com/manuelwiris/ant_example.git"/>
         <arg line="."/>
       </args>
     </git>
